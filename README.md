@@ -16,7 +16,16 @@ $ jest
       4 |
 
       at Object.get [as rootNode] (node_modules/tree-sitter/index.js:20:35)
-      at Obje`
+      at Object.<anonymous> (node_modules/tree-sitter/index.js:16:26)
+      at Object.<anonymous> (src/lib/tokenizer.ts:1:1)
+
+Test Suites: 1 failed, 1 passed, 2 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.059s
+Ran all test suites.
+error Command failed with exit code 1.
+info 
 ```
 
 # How to reproduce?
