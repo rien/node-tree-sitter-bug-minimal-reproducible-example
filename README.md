@@ -2,43 +2,53 @@
 
 ```
 yarn run v1.19.1
-$ jest
- PASS  src/lib/__test__/one.test.ts
- FAIL  src/lib/__test__/two.test.ts
+PASS src/lib/__test__/two.test.js
+FAIL src/lib/__test__/one.test.js
   ● Test suite failed to run
 
     TypeError: Illegal invocation
 
-    > 1 | import { default as Parser } from "tree-sitter";
+    > 1 | const Parser = require("tree-sitter");
         | ^
-      2 |
-      3 | export class Tokenizer {
-      4 |
+      2 | 
+      3 | class Tokenizer {
+      4 | 
 
       at Object.get [as rootNode] (node_modules/tree-sitter/index.js:20:35)
       at Object.<anonymous> (node_modules/tree-sitter/index.js:16:26)
-      at Object.<anonymous> (src/lib/tokenizer.ts:1:1)
+      at Object.<anonymous> (src/lib/tokenizer.js:1:1)
 
 Test Suites: 1 failed, 1 passed, 2 total
 Tests:       1 passed, 1 total
 Snapshots:   0 total
-Time:        1.059s
+Time:        0.889s, estimated 1s
 Ran all test suites.
 error Command failed with exit code 1.
-info 
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
 
 # How to reproduce?
 
 ```
-yarn install
-yarn run test # will possibly succeed
-yarn run test # will fail with 'TypeError: invalid invocation'
+# Clone example
+git clone git@github.com:rien/node-tree-sitter-bug-minimal-reproducible-example.git
+cd node-tree-sitter-bug-minimal-reproducible-example
 
+# Install dependencies
+yarn install
+
+# Run jest with all tests
+yarn run jest # will possibly succeed
+yarn run jest # will fail with 'TypeError: invalid invocation'
+
+# Run jest a single test at a time
 yarn run test src/lib/__test__/one.test.ts # succeeds
 yarn run test src/lib/__test__/two.test.ts # succeeds
+
+# Run all 100+ ava tests
+yarn run ava # succeeds
 ```
 
-Running `yarn run test --clearCache` sometimes solves this issue for a few runs.
+Running `yarn run jest --clearCache` sometimes solves this issue for a few runs.
 
 
