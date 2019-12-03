@@ -4,7 +4,8 @@
   "description": "reproduce bug",
   "main": "src/lib/app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "testdebug": "node inspect ./node_modules/jest/bin/jest.js --runInBand"
   },
   "ava": {
     "files": ["src/tests/**/*"]
