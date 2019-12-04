@@ -51,4 +51,18 @@ yarn run ava # succeeds
 
 Running `yarn run jest --clearCache` sometimes solves this issue for a few runs.
 
+# Cause
 
+Jest overrides the `require` behaviour, which causes the native code to be
+initialized more than once. Only the first initialization (wrapping a native 
+object) succeeds, causing the initializations thereafter to fail.
+
+# Fix
+
+A possible fix is to bind the module that can only be included once to a global
+variable, like in this commit:
+
+https://github.com/rien/node-tree-sitter-bug-minimal-reproducible-example/commit/57606393c8977d72f926e866abf3996ac75c87a4
+
+However, if your project is using TypeScript this will become very messy to let
+this work properly.
