@@ -1,10 +1,9 @@
-const Parser = require("tree-sitter");
+const Parser = require('tree-sitter');
 
 class Tokenizer {
 
   constructor(language) {
     this.language = language;
-    debugger;
     this.parser = new Parser();
     const languageModule = require("tree-sitter-" + language);
     this.parser.setLanguage(languageModule);
